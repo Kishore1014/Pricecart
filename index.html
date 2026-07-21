@@ -1003,66 +1003,38 @@ let watches = [];
 let allProducts = [];
 let dbLoaded = false;
 
-async function fetchFromDB(category) {
+async function fetchFromDB(category, limit=50, offset=0) {
   const headers = {'apikey': SUPABASE_KEY, 'Authorization': 'Bearer ' + SUPABASE_KEY};
   
-  // Fetch products
   const res = await fetch(
-    `${SUPABASE_URL}/rest/v1/products?category=eq.${category}&select=*&limit=2000`,
+    `${SUPABASE_URL}/rest/v1/products?category=eq.${category}&select=*&limit=${limit}&offset=${offset}&order=id`,
     {headers}
   );
   const products = await res.json();
   if(!Array.isArray(products)) throw new Error('Products fetch failed');
 
-  // Fetch sellers in batches of 100 to avoid URL length limit
   const keys = products.map(p => p.key);
-  let sellers = [];
-  const BATCH = 100;
-  for(let i = 0; i < keys.length; i += BATCH) {
-    const batch = keys.slice(i, i + BATCH);
-    const selRes = await fetch(
-      `${SUPABASE_URL}/rest/v1/sellers?product_key=in.(${batch.join(',')})&select=*&limit=1000`,
-      {headers}
-    );
-    const batchSellers = await selRes.json();
-    if(Array.isArray(batchSellers)) sellers = sellers.concat(batchSellers);
-  }
+  if(keys.length === 0) return [];
 
-  // Build sellers map for fast lookup
+  // Fetch sellers for this batch
+  const selRes = await fetch(
+    `${SUPABASE_URL}/rest/v1/sellers?product_key=in.(${keys.join(',')})&select=*&limit=1000`,
+    {headers}
+  );
+  const sellers = await selRes.json();
+  
   const sellersMap = {};
-  sellers.forEach(s => {
-    if(!sellersMap[s.product_key]) sellersMap[s.product_key] = [];
-    sellersMap[s.product_key].push(s);
-  });
-
-  // Fetch sizes for sneakers in batches
-  let sizesMap = {};
-  if(category === 'sneakers') {
-    let allSizes = [];
-    for(let i = 0; i < keys.length; i += BATCH) {
-      const batch = keys.slice(i, i + BATCH);
-      const szRes = await fetch(
-        `${SUPABASE_URL}/rest/v1/sizes?product_key=in.(${batch.join(',')})&select=*&limit=2000`,
-        {headers}
-      );
-      const batchSizes = await szRes.json();
-      if(Array.isArray(batchSizes)) allSizes = allSizes.concat(batchSizes);
-    }
-    allSizes.forEach(s => {
-      if(!sizesMap[s.product_key]) sizesMap[s.product_key] = [];
-      sizesMap[s.product_key].push({size: s.size, inStock: s.in_stock});
+  if(Array.isArray(sellers)) {
+    sellers.forEach(s => {
+      if(!sellersMap[s.product_key]) sellersMap[s.product_key] = [];
+      sellersMap[s.product_key].push(s);
     });
   }
 
-  // Map to app format
   return products.map(p => {
     const prodSellers = (sellersMap[p.key] || [])
       .map(s => ({n: s.seller_name, p: s.price, o: s.is_official, stock: s.in_stock}))
       .sort((a,b) => a.p - b.p);
-    
-    const pSizes = sizesMap[p.key] || [];
-    const inStockSizes = pSizes.filter(s => s.inStock).map(s => s.size);
-    const outOfStock = pSizes.filter(s => !s.inStock).map(s => s.size);
 
     return {
       key: p.key,
@@ -1076,8 +1048,8 @@ async function fetchFromDB(category) {
       hype: p.hype || 'new',
       type: p.watch_type || '',
       case_size: p.case_size || '',
-      sizes: inStockSizes.concat(outOfStock),
-      outOfStock: outOfStock,
+      sizes: ['6','6.5','7','7.5','8','8.5','9','9.5','10','10.5','11','12'],
+      outOfStock: [],
       specs: {
         SKU: p.sku || '',
         Style: p.style || '',
@@ -1095,22 +1067,60 @@ async function fetchFromDB(category) {
 async function loadAllProducts() {
   try {
     showLoading();
-    const [s, w] = await Promise.all([
-      fetchFromDB('sneakers'),
-      fetchFromDB('watches')
+
+    // Load first 50 of each instantly
+    const [s1, w1] = await Promise.all([
+      fetchFromDB('sneakers', 50, 0),
+      fetchFromDB('watches', 50, 0)
     ]);
-    sneakers = s;
-    watches = w;
-    allProducts = [...s, ...w];
+
+    sneakers = s1;
+    watches = w1;
+    allProducts = [...s1, ...w1];
     dbLoaded = true;
     hideLoading();
     renderGrid('sneakers');
     renderGrid('watches');
-    document.getElementById('sneaker-count').textContent = sneakers.length + ' products';
-    document.getElementById('watch-count').textContent = watches.length + ' products';
+    document.getElementById('sneaker-count').textContent = sneakers.length + '+ products';
+    document.getElementById('watch-count').textContent = watches.length + '+ products';
+
+    // Load rest in background silently
+    loadMoreInBackground();
+
   } catch(e) {
     console.error('DB load failed:', e);
     hideLoading();
+  }
+}
+
+async function loadMoreInBackground() {
+  const headers = {'apikey': SUPABASE_KEY, 'Authorization': 'Bearer ' + SUPABASE_KEY};
+  const BATCH = 100;
+
+  // Get total counts
+  const [scntRes, wcntRes] = await Promise.all([
+    fetch(`${SUPABASE_URL}/rest/v1/products?category=eq.sneakers&select=count`, {headers:{...{'apikey':SUPABASE_KEY,'Authorization':'Bearer '+SUPABASE_KEY,'Prefer':'count=exact'}}}),
+    fetch(`${SUPABASE_URL}/rest/v1/products?category=eq.watches&select=count`, {headers:{...{'apikey':SUPABASE_KEY,'Authorization':'Bearer '+SUPABASE_KEY,'Prefer':'count=exact'}}})
+  ]);
+  
+  // Load remaining sneakers
+  for(let offset = 50; offset < 1500; offset += BATCH) {
+    const more = await fetchFromDB('sneakers', BATCH, offset);
+    if(more.length === 0) break;
+    sneakers = sneakers.concat(more);
+    allProducts = [...sneakers, ...watches];
+    document.getElementById('sneaker-count').textContent = sneakers.length + ' products';
+    if(currentSection === 'sneakers') renderGrid('sneakers');
+  }
+
+  // Load remaining watches
+  for(let offset = 50; offset < 200; offset += BATCH) {
+    const more = await fetchFromDB('watches', BATCH, offset);
+    if(more.length === 0) break;
+    watches = watches.concat(more);
+    allProducts = [...sneakers, ...watches];
+    document.getElementById('watch-count').textContent = watches.length + ' products';
+    if(currentSection === 'watches') renderGrid('watches');
   }
 }
 
