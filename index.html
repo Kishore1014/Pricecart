@@ -1011,24 +1011,43 @@ async function fetchFromDB(category) {
     {headers}
   );
   const products = await res.json();
-  
-  // Fetch sellers for these products
-  const keys = products.map(p => p.key);
-  const selRes = await fetch(
-    `${SUPABASE_URL}/rest/v1/sellers?product_key=in.(${keys.join(',')})&select=*`,
-    {headers}
-  );
-  const sellers = await selRes.json();
+  if(!Array.isArray(products)) throw new Error('Products fetch failed');
 
-  // Fetch sizes for sneakers
-  let sizesMap = {};
-  if(category === 'sneakers') {
-    const szRes = await fetch(
-      `${SUPABASE_URL}/rest/v1/sizes?product_key=in.(${keys.join(',')})&select=*`,
+  // Fetch sellers in batches of 100 to avoid URL length limit
+  const keys = products.map(p => p.key);
+  let sellers = [];
+  const BATCH = 100;
+  for(let i = 0; i < keys.length; i += BATCH) {
+    const batch = keys.slice(i, i + BATCH);
+    const selRes = await fetch(
+      `${SUPABASE_URL}/rest/v1/sellers?product_key=in.(${batch.join(',')})&select=*&limit=1000`,
       {headers}
     );
-    const sizes = await szRes.json();
-    sizes.forEach(s => {
+    const batchSellers = await selRes.json();
+    if(Array.isArray(batchSellers)) sellers = sellers.concat(batchSellers);
+  }
+
+  // Build sellers map for fast lookup
+  const sellersMap = {};
+  sellers.forEach(s => {
+    if(!sellersMap[s.product_key]) sellersMap[s.product_key] = [];
+    sellersMap[s.product_key].push(s);
+  });
+
+  // Fetch sizes for sneakers in batches
+  let sizesMap = {};
+  if(category === 'sneakers') {
+    let allSizes = [];
+    for(let i = 0; i < keys.length; i += BATCH) {
+      const batch = keys.slice(i, i + BATCH);
+      const szRes = await fetch(
+        `${SUPABASE_URL}/rest/v1/sizes?product_key=in.(${batch.join(',')})&select=*&limit=2000`,
+        {headers}
+      );
+      const batchSizes = await szRes.json();
+      if(Array.isArray(batchSizes)) allSizes = allSizes.concat(batchSizes);
+    }
+    allSizes.forEach(s => {
       if(!sizesMap[s.product_key]) sizesMap[s.product_key] = [];
       sizesMap[s.product_key].push({size: s.size, inStock: s.in_stock});
     });
@@ -1036,14 +1055,13 @@ async function fetchFromDB(category) {
 
   // Map to app format
   return products.map(p => {
-    const prodSellers = sellers
-      .filter(s => s.product_key === p.key)
+    const prodSellers = (sellersMap[p.key] || [])
       .map(s => ({n: s.seller_name, p: s.price, o: s.is_official, stock: s.in_stock}))
       .sort((a,b) => a.p - b.p);
     
-    const allSizes = sizesMap[p.key] || [];
-    const inStockSizes = allSizes.filter(s => s.inStock).map(s => s.size);
-    const outOfStock = allSizes.filter(s => !s.inStock).map(s => s.size);
+    const pSizes = sizesMap[p.key] || [];
+    const inStockSizes = pSizes.filter(s => s.inStock).map(s => s.size);
+    const outOfStock = pSizes.filter(s => !s.inStock).map(s => s.size);
 
     return {
       key: p.key,
