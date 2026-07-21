@@ -11,20 +11,20 @@
 *{margin:0;padding:0;box-sizing:border-box;-webkit-tap-highlight-color:transparent}
 :root{
   --black:#0A0A0A;
-  --dark:#111111;
-  --card:#181818;
-  --border:#242424;
+  --dark:#F8F6F1;
+  --card:#FFFFFF;
+  --border:#E8E4DC;
   --white:#FFFFFF;
-  --off:#F5F5F3;
-  --muted:#6B6B6B;
-  --accent:#FF6B35;
-  --red:#FF3B30;
-  --green:#30D158;
-  --text:#E8E8E8;
-  --subtext:#888;
+  --off:#F2EFE9;
+  --muted:#9A9490;
+  --accent:#C9A96E;
+  --red:#D4433B;
+  --green:#2D7D52;
+  --text:#1A1A1A;
+  --subtext:#6B6865;
 }
 html{scroll-behavior:smooth;max-width:100vw;overflow-x:hidden}
-body{font-family:'Inter',sans-serif;background:var(--black);color:var(--text);overflow-x:hidden;min-height:100vh;max-width:100vw}
+body{font-family:'Inter',sans-serif;background:var(--off);color:var(--text);overflow-x:hidden;min-height:100vh;max-width:100vw}
 ::-webkit-scrollbar{width:3px}
 ::-webkit-scrollbar-thumb{background:var(--border)}
 button{cursor:pointer;font-family:'Inter',sans-serif;border:none;background:none}
@@ -47,8 +47,8 @@ a{text-decoration:none;color:inherit}
   display:flex;flex-direction:column;align-items:center;justify-content:center;
   transition:flex .4s cubic-bezier(.77,0,.18,1);
 }
-#split-sneakers{background:var(--black);border-right:1px solid var(--border)}
-#split-watches{background:var(--dark)}
+#split-sneakers{background:#0A0A0A;border-right:1px solid #222}
+#split-watches{background:#141414}
 
 .split:hover{flex:1.08}
 
@@ -111,7 +111,7 @@ a{text-decoration:none;color:inherit}
 /* NAV */
 .nav{
   position:sticky;top:0;z-index:100;
-  height:54px;background:rgba(10,10,10,0.96);
+  height:54px;background:rgba(248,246,241,0.97);
   border-bottom:1px solid var(--border);
   backdrop-filter:blur(16px);
   display:flex;align-items:center;
@@ -120,26 +120,26 @@ a{text-decoration:none;color:inherit}
 }
 .nav-logo{
   font-family:'Bebas Neue',sans-serif;
-  font-size:17px;letter-spacing:.08em;color:var(--white);
+  font-size:17px;letter-spacing:.08em;color:var(--black);
   flex-shrink:0;cursor:pointer;
 }
 .nav-tabs{display:flex;gap:2px;flex-shrink:0}
 .nav-tab{
   font-size:11px;font-weight:600;letter-spacing:.06em;
   text-transform:uppercase;padding:6px 10px;
-  color:var(--muted);transition:all .2s;border-radius:4px;white-space:nowrap;
+  color:var(--subtext);transition:all .2s;border-radius:4px;white-space:nowrap;
 }
-.nav-tab.on{background:var(--accent);color:var(--black)}
-.nav-tab:hover:not(.on){color:var(--white)}
+.nav-tab.on{background:var(--black);color:var(--white)}
+.nav-tab:hover:not(.on){color:var(--black)}
 .nav-search{
   flex:1;max-width:360px;position:relative;
   display:flex;align-items:center;
-  background:var(--card);border:1px solid var(--border);
+  background:var(--off);border:1px solid var(--border);
   border-radius:6px;overflow:visible;
 }
 .nav-search input{
   flex:1;background:none;border:none;outline:none;
-  padding:8px 12px;font-size:13px;color:var(--text);
+  padding:8px 12px;font-size:13px;color:var(--black);
   min-width:0;
 }
 .nav-search input::placeholder{color:var(--muted)}
@@ -153,15 +153,15 @@ a{text-decoration:none;color:inherit}
   font-size:11px;font-weight:700;letter-spacing:.04em;
   cursor:pointer;white-space:nowrap;flex-shrink:0;
 }
-.compare-bar{display:flex!important;flex-shrink:0;white-space:nowrap}
+.compare-bar{display:flex!important;flex-shrink:0;white-space:nowrap;background:var(--black)!important;color:var(--white)!important}
 
 /* SUGGESTION BOX */
 .sug-box{
   position:absolute;top:calc(100% + 6px);left:0;right:0;
-  background:var(--card);border:1px solid var(--border);
+  background:var(--white);border:1px solid var(--border);
   border-radius:8px;z-index:200;
   max-height:260px;overflow-y:auto;display:none;
-  box-shadow:0 20px 60px rgba(0,0,0,0.6);
+  box-shadow:0 8px 32px rgba(0,0,0,0.12);
 }
 .sug-item{
   display:flex;align-items:center;gap:10px;
@@ -186,6 +186,8 @@ a{text-decoration:none;color:inherit}
   padding:14px 12px 0;
   border-bottom:1px solid var(--border);
   width:100%;overflow-x:hidden;
+  position:relative;z-index:50;
+  background:var(--off);
 }
 .cat-title-row{
   display:flex;align-items:baseline;
@@ -193,7 +195,7 @@ a{text-decoration:none;color:inherit}
 }
 .cat-title{
   font-family:'Bebas Neue',sans-serif;
-  font-size:28px;letter-spacing:.06em;color:var(--white);
+  font-size:28px;letter-spacing:.06em;color:var(--black);
 }
 .cat-count{font-size:12px;color:var(--muted)}
 
@@ -204,20 +206,20 @@ a{text-decoration:none;color:inherit}
   font-size:11px;font-weight:600;letter-spacing:.06em;
   text-transform:uppercase;padding:7px 14px;
   border:1px solid var(--border);border-radius:4px;
-  color:var(--muted);background:var(--card);
+  color:var(--subtext);background:var(--white);
   display:flex;align-items:center;gap:6px;
   transition:all .2s;
 }
-.filter-btn:hover{border-color:var(--accent);color:var(--white)}
-.filter-btn.active{border-color:var(--accent);color:var(--accent);background:rgba(232,255,0,0.05)}
+.filter-btn:hover{border-color:var(--accent);color:var(--accent)}
+.filter-btn.active{border-color:var(--accent);color:var(--accent);background:rgba(201,169,110,0.08)}
 .filter-btn svg{transition:transform .2s}
 .filter-btn.open svg{transform:rotate(180deg)}
 .filter-dropdown{
   position:absolute;top:calc(100% + 6px);left:0;
-  background:var(--card);border:1px solid var(--border);
-  border-radius:8px;z-index:50;min-width:160px;
+  background:var(--white);border:1px solid var(--border);
+  border-radius:8px;z-index:500;min-width:160px;
   padding:6px;display:none;
-  box-shadow:0 16px 40px rgba(0,0,0,0.5);
+  box-shadow:0 16px 40px rgba(0,0,0,0.15);
 }
 .filter-dropdown.open{display:block}
 .filter-option{
@@ -226,7 +228,7 @@ a{text-decoration:none;color:inherit}
   align-items:center;gap:8px;color:var(--muted);
   transition:all .15s;
 }
-.filter-option:hover{background:var(--border);color:var(--white)}
+.filter-option:hover{background:var(--border);color:var(--black)}
 .filter-option.selected{color:var(--accent)}
 .filter-option-check{
   width:14px;height:14px;border:1px solid var(--border);
@@ -245,20 +247,20 @@ a{text-decoration:none;color:inherit}
   border-radius:3px;cursor:pointer;color:var(--muted);
   transition:all .15s;
 }
-.size-opt:hover{border-color:var(--white);color:var(--white)}
-.size-opt.sel{border-color:var(--accent);color:var(--accent);background:rgba(232,255,0,0.06)}
+.size-opt:hover{border-color:var(--black);color:var(--black)}
+.size-opt.sel{border-color:var(--accent);color:var(--accent);background:rgba(201,169,110,0.08)}
 .active-filters{
   display:flex;gap:6px;flex-wrap:wrap;
   padding:0 20px 12px;
 }
 .active-filter-tag{
   font-size:11px;font-weight:600;
-  padding:4px 10px;background:rgba(232,255,0,0.08);
-  border:1px solid rgba(232,255,0,0.2);color:var(--accent);
+  padding:4px 10px;background:rgba(201,169,110,0.1);
+  border:1px solid rgba(201,169,110,0.3);color:var(--accent);
   border-radius:100px;display:flex;align-items:center;gap:6px;
   cursor:pointer;
 }
-.active-filter-tag:hover{background:rgba(232,255,0,0.15)}
+.active-filter-tag:hover{background:rgba(201,169,110,0.2)}
 
 /* PRODUCT GRID */
 .prod-grid{
@@ -266,17 +268,19 @@ a{text-decoration:none;color:inherit}
   grid-template-columns:repeat(auto-fill,minmax(160px,1fr));
   gap:10px;padding:12px;
   width:100%;box-sizing:border-box;
+  position:relative;z-index:1;
 }
 .prod-card{
-  background:var(--card);border:1px solid var(--border);
+  background:var(--white);border:1px solid var(--border);
   border-radius:10px;overflow:hidden;cursor:pointer;
   transition:all .25s;position:relative;
+  box-shadow:0 1px 4px rgba(0,0,0,0.06);
 }
-.prod-card:hover{border-color:rgba(232,255,0,0.3);transform:translateY(-2px)}
-.prod-card.comparing{border-color:var(--accent)}
+.prod-card:hover{border-color:var(--accent);transform:translateY(-2px);box-shadow:0 4px 20px rgba(0,0,0,0.1)}
+.prod-card.comparing{border-color:var(--accent);box-shadow:0 0 0 2px var(--accent)}
 .prod-card-img{
   width:100%;aspect-ratio:1;
-  background:var(--dark);display:flex;
+  background:var(--off);display:flex;
   align-items:center;justify-content:center;
   font-size:48px;position:relative;overflow:hidden;
 }
@@ -287,7 +291,7 @@ a{text-decoration:none;color:inherit}
   text-transform:uppercase;padding:3px 8px;border-radius:3px;
 }
 .hype-hot{background:var(--red);color:var(--white)}
-.hype-trending{background:var(--accent);color:var(--black)}
+.hype-trending{background:var(--accent);color:var(--white)}
 .hype-new{background:var(--green);color:var(--black)}
 .compare-check{
   position:absolute;top:8px;right:8px;
@@ -305,7 +309,7 @@ a{text-decoration:none;color:inherit}
   text-transform:uppercase;color:var(--accent);margin-bottom:4px;
 }
 .pc-name{
-  font-size:13px;font-weight:600;color:var(--white);
+  font-size:13px;font-weight:600;color:var(--black);
   margin-bottom:2px;line-height:1.3;
 }
 .pc-sku{font-size:10px;color:var(--muted);margin-bottom:10px}
@@ -315,7 +319,7 @@ a{text-decoration:none;color:inherit}
 }
 .pc-price{
   font-family:'Bebas Neue',sans-serif;
-  font-size:20px;letter-spacing:.04em;color:var(--white);
+  font-size:20px;letter-spacing:.04em;color:var(--black);
 }
 .pc-from{font-size:10px;color:var(--muted)}
 .pc-save{
@@ -334,14 +338,14 @@ a{text-decoration:none;color:inherit}
 }
 .release-grid{display:grid;grid-template-columns:repeat(auto-fill,minmax(160px,1fr));gap:10px}
 .release-card{
-  background:var(--card);border:1px solid var(--border);
+  background:var(--white);border:1px solid var(--border);
   border-radius:8px;padding:12px;
 }
 .release-date{
   font-size:10px;font-weight:700;letter-spacing:.08em;
   text-transform:uppercase;color:var(--accent);margin-bottom:6px;
 }
-.release-name{font-size:12px;font-weight:600;color:var(--white);margin-bottom:2px}
+.release-name{font-size:12px;font-weight:600;color:var(--black);margin-bottom:2px}
 .release-price{font-size:11px;color:var(--muted)}
 
 /* PRODUCT PAGE */
@@ -349,7 +353,7 @@ a{text-decoration:none;color:inherit}
 .prod-page.active{display:flex}
 
 .prod-header{
-  background:var(--dark);border-bottom:1px solid var(--border);
+  background:var(--white);border-bottom:1px solid var(--border);
   padding:16px 20px;
 }
 .prod-bc{
@@ -376,13 +380,13 @@ a{text-decoration:none;color:inherit}
 .prod-name{
   font-family:'Bebas Neue',sans-serif;
   font-size:22px;letter-spacing:.04em;
-  color:var(--white);line-height:1.15;margin-bottom:3px;
+  color:var(--black);line-height:1.15;margin-bottom:3px;
 }
 .prod-sku{font-size:11px;color:var(--muted);margin-bottom:10px}
 .prod-best-price{
   display:inline-flex;align-items:baseline;gap:8px;
-  background:rgba(232,255,0,0.06);
-  border:1px solid rgba(232,255,0,0.15);
+  background:rgba(201,169,110,0.08);
+  border:1px solid rgba(201,169,110,0.2);
   border-radius:6px;padding:8px 14px;
 }
 .prod-price-big{
@@ -400,7 +404,7 @@ a{text-decoration:none;color:inherit}
   padding:20px;border-right:1px solid var(--border);
   overflow-y:auto;
 }
-.prod-right{padding:16px;overflow-y:auto}
+.prod-right{padding:16px;overflow-y:auto;background:var(--off)}
 
 .section-label{
   font-size:10px;font-weight:700;letter-spacing:.1em;
@@ -419,7 +423,7 @@ a{text-decoration:none;color:inherit}
   border:1px solid var(--border);border-radius:4px;
   font-size:11px;font-weight:600;color:var(--muted);
 }
-.size-avail.in{border-color:var(--green);color:var(--green)}
+.size-avail.in{border-color:var(--green);color:var(--green);background:rgba(45,125,82,0.05)}
 .size-avail.out{opacity:.3;text-decoration:line-through}
 
 /* SPEC TABLE */
@@ -429,7 +433,7 @@ a{text-decoration:none;color:inherit}
 .spec-k{
   font-size:10px;font-weight:600;text-transform:uppercase;
   letter-spacing:.06em;color:var(--muted);
-  padding:10px 12px;background:rgba(255,255,255,0.02);
+  padding:10px 12px;background:var(--off);
 }
 .spec-v{font-size:12px;color:var(--text);padding:10px 12px}
 
@@ -442,7 +446,7 @@ a{text-decoration:none;color:inherit}
   cursor:pointer;padding:10px 0;
   border-top:1px solid var(--border);
 }
-.auth-toggle:hover{color:var(--white)}
+.auth-toggle:hover{color:var(--black)}
 .auth-content{display:none;padding:12px 0}
 .auth-content.open{display:block}
 .auth-tip{
@@ -457,11 +461,11 @@ a{text-decoration:none;color:inherit}
   padding:11px 12px;border:1px solid var(--border);
   border-radius:6px;margin-bottom:6px;
   text-decoration:none;color:var(--text);
-  transition:all .2s;
+  transition:all .2s;background:var(--white);
 }
-.pe:hover{border-color:rgba(232,255,0,0.3);background:rgba(232,255,0,0.03)}
-.pe.best{background:var(--accent);border-color:var(--accent)}
-.pe.best *{color:var(--black)!important}
+.pe:hover{border-color:var(--accent);background:rgba(201,169,110,0.04)}
+.pe.best{background:var(--black);border-color:var(--black)}
+.pe.best *{color:var(--white)!important}
 .pe-rank{
   font-family:'Bebas Neue',sans-serif;font-size:14px;
   color:var(--muted);width:14px;flex-shrink:0;
@@ -472,14 +476,14 @@ a{text-decoration:none;color:inherit}
   text-transform:uppercase;padding:2px 6px;border-radius:3px;flex-shrink:0;
 }
 .stk-y{background:rgba(48,209,88,0.12);color:var(--green)}
-.pe.best .stk-y{background:rgba(0,0,0,0.15);color:var(--black)}
+.pe.best .stk-y{background:rgba(255,255,255,0.15);color:var(--white)}
 .stk-n{background:rgba(255,59,48,0.1);color:var(--red)}
 .pe-price{
   font-family:'Bebas Neue',sans-serif;font-size:16px;
   letter-spacing:.04em;margin-left:auto;flex-shrink:0;
 }
 .pe-badge{
-  background:var(--black);color:var(--accent);
+  background:var(--accent);color:var(--white);
   font-size:8px;font-weight:800;letter-spacing:.08em;
   text-transform:uppercase;padding:2px 6px;border-radius:3px;
 }
@@ -501,7 +505,7 @@ a{text-decoration:none;color:inherit}
   cursor:pointer;padding:10px 0 8px;
   border-top:1px solid var(--border);margin-top:8px;
 }
-.history-toggle:hover{color:var(--white)}
+.history-toggle:hover{color:var(--black)}
 .history-chart{
   display:none;padding:12px 0;
 }
@@ -522,7 +526,7 @@ a{text-decoration:none;color:inherit}
   transform:translateX(-50%);
   background:var(--card);border:1px solid var(--border);
   border-radius:4px;padding:4px 8px;
-  font-size:10px;font-weight:600;color:var(--white);
+  font-size:10px;font-weight:600;color:var(--black);
   white-space:nowrap;display:none;pointer-events:none;
 }
 .chart-bar:hover .chart-bar-tip{display:block}
@@ -539,7 +543,7 @@ a{text-decoration:none;color:inherit}
   color:var(--muted);font-size:11px;font-weight:600;
   letter-spacing:.06em;text-transform:uppercase;
   display:flex;align-items:center;justify-content:center;gap:8px;
-  transition:all .2s;background:var(--card);
+  transition:all .2s;background:var(--white);
 }
 .alert-btn:hover{border-color:var(--accent);color:var(--accent)}
 
@@ -564,7 +568,7 @@ a{text-decoration:none;color:inherit}
   transition:all .2s;background:var(--card);
 }
 .prod-act:hover{border-color:var(--accent);color:var(--accent)}
-.prod-act.saved{border-color:var(--accent);color:var(--accent);background:rgba(232,255,0,0.05)}
+.prod-act.saved{border-color:var(--accent);color:var(--accent);background:rgba(201,169,110,0.08)}
 
 /* SIMILAR */
 .similar-section{padding:20px;border-top:1px solid var(--border)}
@@ -573,12 +577,12 @@ a{text-decoration:none;color:inherit}
 .compare-page{display:none;flex:1;flex-direction:column}
 .compare-page.active{display:flex}
 .compare-header{padding:16px;border-bottom:1px solid var(--border);flex-shrink:0}
-.compare-h{font-family:'Bebas Neue',sans-serif;font-size:22px;letter-spacing:.06em;color:var(--white);margin-bottom:2px}
+.compare-h{font-family:'Bebas Neue',sans-serif;font-size:22px;letter-spacing:.06em;color:var(--black);margin-bottom:2px}
 .compare-sub{font-size:12px;color:var(--muted)}
 .compare-wrap{flex:1;overflow-y:auto;padding:0 0 40px}
 .compare-prod-row{
   display:grid;border-bottom:1px solid var(--border);
-  background:var(--card);position:sticky;top:0;z-index:2;
+  background:var(--white);position:sticky;top:0;z-index:2;
 }
 .compare-prod-cell{
   padding:14px 12px;border-right:1px solid var(--border);
@@ -587,16 +591,16 @@ a{text-decoration:none;color:inherit}
 .compare-prod-cell:last-child{border-right:none}
 .compare-prod-emoji{font-size:32px;margin-bottom:6px}
 .compare-prod-brand{font-size:9px;font-weight:700;letter-spacing:.1em;text-transform:uppercase;color:var(--accent);margin-bottom:3px}
-.compare-prod-name{font-size:12px;font-weight:600;color:var(--white);line-height:1.3}
+.compare-prod-name{font-size:12px;font-weight:600;color:var(--black);line-height:1.3}
 .compare-spec-group{border-bottom:2px solid var(--border)}
 .compare-spec-label{
   font-size:9px;font-weight:700;letter-spacing:.1em;text-transform:uppercase;
-  color:var(--muted);padding:10px 12px 6px;background:rgba(255,255,255,0.02);
+  color:var(--muted);padding:10px 12px 6px;background:var(--off);
 }
 .compare-spec-row{display:grid;border-bottom:1px solid var(--border)}
 .compare-spec-key{
   font-size:10px;font-weight:600;text-transform:uppercase;letter-spacing:.06em;
-  color:var(--muted);padding:10px 12px;background:rgba(255,255,255,0.02);
+  color:var(--muted);padding:10px 12px;background:var(--off);
   display:flex;align-items:center;
 }
 .compare-spec-val{
@@ -612,28 +616,28 @@ a{text-decoration:none;color:inherit}
 .copped-feed{display:flex;flex-direction:column;gap:8px;margin-top:10px}
 .copped-item{
   display:flex;align-items:center;gap:10px;
-  padding:10px 12px;background:var(--card);
+  padding:10px 12px;background:var(--white);
   border:1px solid var(--border);border-radius:6px;
 }
 .copped-emoji{font-size:20px;flex-shrink:0}
 .copped-text{flex:1;min-width:0}
-.copped-name{font-size:12px;font-weight:600;color:var(--white)}
+.copped-name{font-size:12px;font-weight:600;color:var(--black)}
 .copped-detail{font-size:11px;color:var(--muted)}
 .copped-time{font-size:10px;color:var(--muted);flex-shrink:0}
 
 /* COOKIE */
 .ck{
   position:fixed;bottom:16px;right:16px;
-  background:var(--card);border:1px solid var(--border);
+  background:var(--white);border:1px solid var(--border);
   border-radius:8px;padding:14px 16px;z-index:999;
   max-width:300px;display:flex;align-items:center;gap:12px;
   transform:translateY(100px);opacity:0;transition:all .4s;
 }
 .ck.show{transform:translateY(0);opacity:1}
 .ck.bye{transform:translateY(100px);opacity:0}
-.ck p{font-size:11px;color:var(--muted);line-height:1.5;flex:1}
+.ck p{font-size:11px;color:var(--subtext);line-height:1.5;flex:1}
 .ck button{
-  background:var(--accent);color:var(--black);
+  background:var(--black);color:var(--white);
   border:none;padding:7px 14px;border-radius:4px;
   font-size:11px;font-weight:700;white-space:nowrap;
 }
@@ -642,7 +646,7 @@ a{text-decoration:none;color:inherit}
 .toast{
   position:fixed;bottom:20px;left:50%;
   transform:translateX(-50%) translateY(80px);
-  background:var(--card);border:1px solid var(--border);
+  background:var(--black);border:1px solid var(--border);
   color:var(--white);font-size:12px;font-weight:500;
   padding:10px 20px;border-radius:6px;z-index:999;
   opacity:0;transition:all .3s;white-space:nowrap;
@@ -795,7 +799,22 @@ a{text-decoration:none;color:inherit}
             <div class="filter-option" onclick="setPriceFilter('sneakers',20000,999999)"><div class="filter-option-check"></div>Above ₹20,000</div>
           </div>
         </div>
-        <button class="filter-btn" onclick="clearFilters('sneakers')" style="color:var(--red);border-color:rgba(255,59,48,0.3)">Clear all</button>
+        <div class="filter-group">
+          <button class="filter-btn" onclick="toggleFilter('color-s')">
+            Colourway
+            <svg width="12" height="12" fill="none" stroke="currentColor" stroke-width="2.5" viewBox="0 0 24 24"><path d="M6 9l6 6 6-6"/></svg>
+          </button>
+          <div class="filter-dropdown" id="color-s">
+            <div class="filter-option" onclick="toggleFilterVal('color-s','White','sneakers')"><div class="filter-option-check"></div>White</div>
+            <div class="filter-option" onclick="toggleFilterVal('color-s','Black','sneakers')"><div class="filter-option-check"></div>Black</div>
+            <div class="filter-option" onclick="toggleFilterVal('color-s','Grey','sneakers')"><div class="filter-option-check"></div>Grey</div>
+            <div class="filter-option" onclick="toggleFilterVal('color-s','Green','sneakers')"><div class="filter-option-check"></div>Green</div>
+            <div class="filter-option" onclick="toggleFilterVal('color-s','Red','sneakers')"><div class="filter-option-check"></div>Red</div>
+            <div class="filter-option" onclick="toggleFilterVal('color-s','Blue','sneakers')"><div class="filter-option-check"></div>Blue</div>
+            <div class="filter-option" onclick="toggleFilterVal('color-s','Gum','sneakers')"><div class="filter-option-check"></div>Gum Sole</div>
+          </div>
+        </div>
+        <button class="filter-btn" onclick="clearFilters('sneakers')" style="color:var(--red);border-color:rgba(212,67,59,0.3)">Clear all</button>
       </div>
       <div class="active-filters" id="sneaker-active-filters"></div>
     </div>
@@ -857,7 +876,18 @@ a{text-decoration:none;color:inherit}
             <div class="filter-option" onclick="setPriceFilter('watches',50000,999999)"><div class="filter-option-check"></div>Above ₹50,000</div>
           </div>
         </div>
-        <button class="filter-btn" onclick="clearFilters('watches')" style="color:var(--red);border-color:rgba(255,59,48,0.3)">Clear all</button>
+        <div class="filter-group">
+          <button class="filter-btn" onclick="toggleFilter('casesize-w')">
+            Case Size
+            <svg width="12" height="12" fill="none" stroke="currentColor" stroke-width="2.5" viewBox="0 0 24 24"><path d="M6 9l6 6 6-6"/></svg>
+          </button>
+          <div class="filter-dropdown" id="casesize-w">
+            <div class="filter-option" onclick="toggleFilterVal('casesize-w','Under 40mm','watches')"><div class="filter-option-check"></div>Under 40mm</div>
+            <div class="filter-option" onclick="toggleFilterVal('casesize-w','40-44mm','watches')"><div class="filter-option-check"></div>40–44mm</div>
+            <div class="filter-option" onclick="toggleFilterVal('casesize-w','44mm+','watches')"><div class="filter-option-check"></div>44mm+</div>
+          </div>
+        </div>
+        <button class="filter-btn" onclick="clearFilters('watches')" style="color:var(--red);border-color:rgba(212,67,59,0.3)">Clear all</button>
       </div>
       <div class="active-filters" id="watch-active-filters"></div>
     </div>
@@ -940,6 +970,9 @@ a{text-decoration:none;color:inherit}
     <div class="compare-wrap" id="compareWrap"></div>
   </div>
 
+
+<div id="loadingBar" style="display:none;position:fixed;top:54px;left:0;right:0;z-index:200;background:var(--accent);height:3px;animation:loadpulse 1.5s ease-in-out infinite"></div>
+<style>@keyframes loadpulse{0%{opacity:.4}50%{opacity:1}100%{opacity:.4}}</style>
 </div><!-- end app -->
 
 <div class="ck" id="ck">
@@ -953,160 +986,125 @@ let currentSection = 'sneakers';
 let compareItems = [];
 let savedItems = [];
 let currentProd = null;
-let activeFilters = {sneakers:{brands:[],sizes:[],styles:[],price:null},watches:{brands:[],types:[],price:null}};
+let activeFilters = {sneakers:{brands:[],sizes:[],styles:[],colors:[],price:null},watches:{brands:[],types:[],casesizes:[],price:null}};
 
 try{savedItems=JSON.parse(localStorage.getItem('pc_saved')||'[]');}catch(e){}
 
 // ============================================================
 // DATA
 // ============================================================
-const sneakers = [
-  {key:'nike-af1-white',brand:'Nike',name:'Air Force 1 Low White',sku:'CW2288-111',style:'Low Top',colorway:'White/White',emoji:'👟',hype:'trending',
-    upper:'Full-grain leather',sole:'Rubber cupsole',sizes:['6','6.5','7','7.5','8','8.5','9','9.5','10','10.5','11','12'],
-    outOfStock:['6','12'],
-    specs:{SKU:'CW2288-111',Style:'Low Top',Colorway:'White/White',Upper:'Full-grain leather',Sole:'Rubber cupsole with Air unit',Lining:'Foam sockliner',Closure:'Lace-up',Toe:'Toe cap leather'},
-    auth:['Check the heel tab stitching - should be tight with no loose threads','Font on the tongue label should be crisp and evenly spaced','Air unit in sole should be clearly visible from the side','Box label should match shoe label exactly - font and size'],
-    history:[7000,7200,6999,7500,7200,7000,6800,6999],
-    sellers:[{n:'Amazon India',p:6999,o:true,stock:true},{n:'Nike India',p:7995,o:true,stock:true},{n:'Flipkart',p:7499,o:true,stock:true},{n:'Myntra',p:7299,o:true,stock:true},{n:'Ajio',p:7199,o:true,stock:true}]},
-  {key:'nike-dunk-low-panda',brand:'Nike',name:'Dunk Low Panda',sku:'DD1391-100',style:'Low Top',colorway:'White/Black',emoji:'👟',hype:'hot',
-    upper:'Leather',sole:'Rubber cupsole',sizes:['6','7','7.5','8','8.5','9','9.5','10','11'],
-    outOfStock:['6'],
-    specs:{SKU:'DD1391-100',Style:'Low Top',Colorway:'White/Black',Upper:'Leather with padded collar',Sole:'Rubber cupsole',Lining:'Foam footbed',Closure:'Lace-up',Origin:'Made in Indonesia'},
-    auth:['Swoosh should be firmly stitched with clean edges','Nike branding on insole should be embossed not printed','Heel counter should be stiff and hold its shape','Check sole for even stitching around the perimeter'],
-    history:[8500,9000,8800,8500,9200,9500,9200,8999],
-    sellers:[{n:'Nike India',p:8999,o:true,stock:true},{n:'Amazon India',p:9499,o:true,stock:true},{n:'Flipkart',p:9299,o:true,stock:true},{n:'Myntra',p:9199,o:true,stock:true},{n:'Superkicks',p:9999,o:true,stock:false}]},
-  {key:'nike-air-max-90',brand:'Nike',name:'Air Max 90 White',sku:'CN8490-100',style:'Low Top',colorway:'White/White-White',emoji:'👟',hype:'new',
-    upper:'Leather/Mesh',sole:'Rubber with Max Air unit',sizes:['6','7','8','8.5','9','9.5','10','11','12'],
-    outOfStock:[],
-    specs:{SKU:'CN8490-100',Style:'Low Top',Colorway:'White/White',Upper:'Leather and mesh',Sole:'Rubber outsole with Max Air cushioning',AirUnit:'270-degree Max Air heel unit',Closure:'Lace-up',Anniversary:'30th Anniversary edition'},
-    auth:['Air unit must be clearly visible at heel','Max Air branding on heel tab should be raised','Mesh panels should be fine and consistent','Check tongue label font - spacing between letters is key'],
-    history:[8000,8200,7999,8500,8200,8000,7800,7999],
-    sellers:[{n:'Amazon India',p:7999,o:true,stock:true},{n:'Nike India',p:8995,o:true,stock:true},{n:'Flipkart',p:8499,o:true,stock:true},{n:'Myntra',p:8299,o:true,stock:true},{n:'Ajio',p:8199,o:true,stock:true}]},
-  {key:'nike-air-max-97',brand:'Nike',name:'Air Max 97 Silver Bullet',sku:'884421-001',style:'Low Top',colorway:'Metallic Silver/Varsity Red',emoji:'👟',hype:'hot',
-    upper:'Leather/Synthetic',sole:'Rubber with full-length Air unit',sizes:['7','7.5','8','8.5','9','9.5','10','11'],
-    outOfStock:['7'],
-    specs:{SKU:'884421-001',Style:'Low Top',Colorway:'Metallic Silver/Varsity Red',Upper:'Leather and synthetic ripple design',Sole:'Full-length Air Max unit',Cushioning:'Full-length encapsulated Air unit',Closure:'Lace-up',Origin:'Japan-inspired design 1997'},
-    auth:['Ripple lines on upper should be symmetrical','Metallic finish should be consistent with no patchy areas','Full-length Air unit visible from side profile','Swoosh stitching should be single thread, clean edges'],
-    history:[11000,11500,10999,12000,11500,11000,10800,10999],
-    sellers:[{n:'Amazon India',p:10999,o:true,stock:true},{n:'Nike India',p:12495,o:true,stock:true},{n:'Flipkart',p:11499,o:true,stock:true},{n:'Myntra',p:11299,o:true,stock:false},{n:'Superkicks',p:11999,o:true,stock:true}]},
-  {key:'nike-sb-dunk',brand:'Nike',name:'Nike SB Dunk Low Pro',sku:'BQ6817-101',style:'Low Top',colorway:'White/Black-White',emoji:'👟',hype:'hot',
-    upper:'Suede/Leather',sole:'Rubber cupsole with Zoom Air',sizes:['6','7','8','9','10','11'],
-    outOfStock:['6','11'],
-    specs:{SKU:'BQ6817-101',Style:'Low Top Skate',Colorway:'White/Black',Upper:'Premium suede and leather',Sole:'Rubber cupsole',Cushioning:'Zoom Air insole',Padding:'Extra foam tongue padding for skating',Closure:'Lace-up'},
-    auth:['SB logo on tongue should be embroidered cleanly','Zoom Air insole - check for responsive cushioning','Suede quality should be consistent grain throughout','Extra tongue padding is unique to SB line'],
-    history:[9000,9500,8999,9800,9500,9200,9000,8999],
-    sellers:[{n:'Nike India',p:8999,o:true,stock:true},{n:'Amazon India',p:9499,o:true,stock:true},{n:'Superkicks',p:9999,o:true,stock:true},{n:'Flipkart',p:9299,o:true,stock:false}]},
-  {key:'adidas-superstar',brand:'Adidas',name:'Adidas Superstar',sku:'EG4958',style:'Low Top',colorway:'White/Black',emoji:'👟',hype:'trending',
-    upper:'Leather',sole:'Rubber shell toe',sizes:['6','6.5','7','7.5','8','8.5','9','9.5','10','10.5','11','12'],
-    outOfStock:[],
-    specs:{SKU:'EG4958',Style:'Low Top',Colorway:'White/Black',Upper:'Full-grain leather',Sole:'Shell toe rubber outsole',Heritage:'Original 1969 basketball shoe',ThreeStripes:'Perforated Three Stripes on side',Closure:'Lace-up'},
-    auth:['Three Stripes should be perfectly parallel and equal width','Shell toe should be firm and hold its round shape','Adidas logo on tongue - check font weight and spacing','Heel tab should have clean single stitching'],
-    history:[5500,5800,5499,6000,5800,5600,5500,5499],
-    sellers:[{n:'Amazon India',p:5499,o:true,stock:true},{n:'Adidas India',p:5999,o:true,stock:true},{n:'Flipkart',p:5799,o:true,stock:true},{n:'Myntra',p:5699,o:true,stock:true},{n:'Ajio',p:5599,o:true,stock:true}]},
-  {key:'adidas-stan-smith',brand:'Adidas',name:'Adidas Stan Smith',sku:'FX5502',style:'Low Top',colorway:'White/Green',emoji:'👟',hype:'new',
-    upper:'Leather',sole:'Rubber',sizes:['6','7','7.5','8','8.5','9','9.5','10','11','12'],
-    outOfStock:[],
-    specs:{SKU:'FX5502',Style:'Low Top Tennis',Colorway:'White/Green',Upper:'Full-grain leather',Sole:'Rubber outsole',Heritage:'Named after tennis champion Stan Smith',Perforations:'Side perforation pattern',Closure:'Lace-up'},
-    auth:['Stan Smith portrait on tongue tab should be clearly defined','Three Stripes perforation pattern should be regular','Clean white leather with no yellowing on new pairs','Green heel tab branding should be embossed not printed'],
-    history:[5000,5200,4999,5500,5200,5000,4800,4999],
-    sellers:[{n:'Amazon India',p:4999,o:true,stock:true},{n:'Adidas India',p:5499,o:true,stock:true},{n:'Flipkart',p:5299,o:true,stock:true},{n:'Myntra',p:5199,o:true,stock:true}]},
-  {key:'adidas-samba',brand:'Adidas',name:'Adidas Samba OG',sku:'B75806',style:'Low Top',colorway:'White/Black/Gum',emoji:'👟',hype:'hot',
-    upper:'Leather/Suede',sole:'Gum rubber',sizes:['6','7','8','8.5','9','9.5','10','11'],
-    outOfStock:['6'],
-    specs:{SKU:'B75806',Style:'Low Top Indoor Football',Colorway:'White/Black/Gum',Upper:'Smooth leather with suede overlay',Sole:'Gum rubber outsole',Heritage:'Original 1950 football training shoe',ToeGuard:'Suede toe reinforcement',Closure:'Lace-up'},
-    auth:['Suede toe overlay should have consistent texture','T-toe construction should have clean separation','Gum sole should be translucent with even coloring','Samba script on tongue is always raised/embossed'],
-    history:[8000,8500,7999,9000,8800,8500,8200,7999],
-    sellers:[{n:'Adidas India',p:7999,o:true,stock:true},{n:'Amazon India',p:8499,o:true,stock:true},{n:'Flipkart',p:8299,o:true,stock:true},{n:'Myntra',p:8199,o:true,stock:false},{n:'Ajio',p:8099,o:true,stock:true}]},
-  {key:'adidas-ultraboost',brand:'Adidas',name:'Adidas Ultraboost 22',sku:'GX5591',style:'Running',colorway:'Core Black',emoji:'👟',hype:'new',
-    upper:'Primeknit+',sole:'Continental rubber/Boost',sizes:['6','7','7.5','8','8.5','9','9.5','10','11','12'],
-    outOfStock:[],
-    specs:{SKU:'GX5591',Style:'Running',Colorway:'Core Black/Core Black',Upper:'Primeknit+ adaptive fit',Sole:'Continental™ Rubber + Boost midsole',Cushioning:'Full-length Boost energy return',Heel:'Torsion system heel reinforcement',Closure:'Lace-up'},
-    auth:['Boost midsole should have visible white pellets/cells','Primeknit upper should have consistent weave pattern','Continental rubber sole logo should be raised','Three Stripes on heel counter should be firm and clean'],
-    history:[13000,13500,12999,14000,13500,13000,12800,12999],
-    sellers:[{n:'Amazon India',p:12999,o:true,stock:true},{n:'Adidas India',p:14999,o:true,stock:true},{n:'Flipkart',p:13999,o:true,stock:true},{n:'Myntra',p:13499,o:true,stock:true}]},
-  {key:'jordan-1-high',brand:'Jordan',name:'Air Jordan 1 High OG Chicago',sku:'555088-101',style:'High Top',colorway:'White/Varsity Red/Black',emoji:'👟',hype:'hot',
-    upper:'Leather',sole:'Rubber cupsole',sizes:['7','7.5','8','8.5','9','9.5','10','11'],
-    outOfStock:['7','11'],
-    specs:{SKU:'555088-101',Style:'High Top Basketball',Colorway:'White/Varsity Red/Black',Upper:'Full-grain leather',Sole:'Rubber cupsole',Cushioning:'Air-Sole unit',Heritage:'Original 1985 design by Peter Moore',AnkleSupport:'High collar for ankle support',Closure:'Lace-up'},
-    auth:['Wings logo on ankle should be stitched not heat-pressed','Leather quality should be firm and consistent grain','Jumpman on insole should be clearly defined','Nike Air branding on heel - font is specific to era'],
-    history:[15000,16000,14999,17000,16500,16000,15500,14999],
-    sellers:[{n:'Nike India',p:14999,o:true,stock:true},{n:'Amazon India',p:15999,o:true,stock:true},{n:'Superkicks',p:16999,o:true,stock:true},{n:'VegNonVeg',p:16499,o:true,stock:true},{n:'Flipkart',p:16299,o:true,stock:false}]},
-  {key:'jordan-1-mid',brand:'Jordan',name:'Air Jordan 1 Mid SE',sku:'DQ8426-106',style:'Mid Top',colorway:'White/Hyper Royal/Black',emoji:'👟',hype:'new',
-    upper:'Leather',sole:'Rubber cupsole',sizes:['6','7','7.5','8','8.5','9','9.5','10','11','12'],
-    outOfStock:[],
-    specs:{SKU:'DQ8426-106',Style:'Mid Top Basketball',Colorway:'White/Hyper Royal/Black',Upper:'Leather',Sole:'Rubber cupsole with Air unit',Cushioning:'Air-Sole unit in heel',Collar:'Mid-top collar',Closure:'Lace-up'},
-    auth:['Jumpman logo should have clean wing detail','Mid collar should be firm and consistent','Color blocking should have clean separation at seams','Tongue label text should be crisp on a white background'],
-    history:[9000,9500,8999,10000,9800,9500,9200,8999],
-    sellers:[{n:'Nike India',p:8999,o:true,stock:true},{n:'Amazon India',p:9499,o:true,stock:true},{n:'Flipkart',p:9299,o:true,stock:true},{n:'Myntra',p:9199,o:true,stock:true}]},
-  {key:'new-balance-990v5',brand:'New Balance',name:'New Balance 990v5 Grey',sku:'M990GL5',style:'Running',colorway:'Grey',emoji:'👟',hype:'trending',
-    upper:'Mesh/Pigskin Suede',sole:'ENCAP/Blown rubber',sizes:['6','7','8','8.5','9','9.5','10','11','12'],
-    outOfStock:[],
-    specs:{SKU:'M990GL5',Style:'Running/Lifestyle',Colorway:'Grey/Silver',Upper:'Mesh with pigskin suede overlays',Sole:'Blown rubber outsole',Cushioning:'ENCAP midsole technology',MadeIn:'Made in USA',Heritage:'Originally designed 1990'},
-    auth:['Made in USA label inside - check state abbreviation','N logo stitching should have clean defined edges','ENCAP sole visible from side - grey foam ring visible','Mesh quality should be dense and consistent'],
-    history:[19000,19500,18999,20000,19500,19000,18800,18999],
-    sellers:[{n:'Amazon India',p:18999,o:true,stock:true},{n:'Flipkart',p:19999,o:true,stock:true},{n:'New Balance India',p:20995,o:true,stock:true},{n:'Myntra',p:19499,o:true,stock:true}]},
-  {key:'new-balance-550',brand:'New Balance',name:'New Balance 550 White Green',sku:'BB550WT1',style:'Low Top',colorway:'White/Green',emoji:'👟',hype:'hot',
-    upper:'Leather',sole:'Rubber cupsole',sizes:['6','7','7.5','8','8.5','9','9.5','10','11'],
-    outOfStock:['6'],
-    specs:{SKU:'BB550WT1',Style:'Low Top Basketball',Colorway:'White/Green',Upper:'Leather',Sole:'Rubber cupsole',Heritage:'1989 basketball court design',PanelDesign:'Exposed foam panel design',Closure:'Lace-up'},
-    auth:['N logo embossment should be consistent on both sides','Panel seams should be clean with no glue residue','Heel tab branding should be centered and clean','Sole stitching should be uniform around perimeter'],
-    history:[9500,10000,9499,10500,10200,9999,9700,9499],
-    sellers:[{n:'Amazon India',p:9499,o:true,stock:true},{n:'Flipkart',p:9999,o:true,stock:true},{n:'Myntra',p:9799,o:true,stock:true},{n:'New Balance India',p:10495,o:true,stock:true}]},
-  {key:'puma-suede',brand:'Puma',name:'Puma Suede Classic XXI',sku:'374915-02',style:'Low Top',colorway:'Peacoat/White',emoji:'👟',hype:'new',
-    upper:'Suede',sole:'Rubber cupsole',sizes:['6','6.5','7','7.5','8','8.5','9','9.5','10','11','12'],
-    outOfStock:[],
-    specs:{SKU:'374915-02',Style:'Low Top',Colorway:'Peacoat/White',Upper:'Suede upper',Sole:'Rubber cupsole',Heritage:'Original 1968 basketball design',FormStripe:'Iconic Puma Formstrip',Closure:'Lace-up'},
-    auth:['Formstrip should be even width from toe to heel','Suede texture should be consistent with no bald patches','Puma cat logo should be clean and proportional','Heel tab stitching should be single stitch, tight'],
-    history:[4000,4200,3999,4500,4200,4000,3800,3999],
-    sellers:[{n:'Amazon India',p:3999,o:true,stock:true},{n:'Puma India',p:4599,o:true,stock:true},{n:'Flipkart',p:4299,o:true,stock:true},{n:'Myntra',p:4199,o:true,stock:true},{n:'Ajio',p:4099,o:true,stock:true}]},
-  {key:'converse-chuck70',brand:'Converse',name:'Converse Chuck 70 High Top OX',sku:'162050C',style:'High Top',colorway:'Parchment/Black/Egret',emoji:'👟',hype:'new',
-    upper:'Canvas',sole:'Rubber',sizes:['6','6.5','7','7.5','8','8.5','9','9.5','10','11','12'],
-    outOfStock:[],
-    specs:{SKU:'162050C',Style:'High Top',Colorway:'Parchment/Black/Egret',Upper:'Canvas',Sole:'Rubber outsole with waffle tread',Heritage:'Premium version of 1917 original',Lining:'Cushioned OrthoLite insole','Ankle Patch':'Star Chevron patch'},
-    auth:['Star logo on ankle should be clean 5-point star','Canvas weave should be tight and consistent','Chuck 70 has cushioned insole vs regular Chuck Taylor','Heel label - check for correct font and star sizing'],
-    history:[5500,5800,5499,6000,5800,5600,5400,5499],
-    sellers:[{n:'Amazon India',p:5499,o:true,stock:true},{n:'Flipkart',p:5799,o:true,stock:true},{n:'Myntra',p:5699,o:true,stock:true},{n:'Converse India',p:5995,o:true,stock:true},{n:'Ajio',p:5599,o:true,stock:true}]},
-  {key:'vans-old-skool',brand:'Vans',name:'Vans Old Skool Black/White',sku:'VN000D3HY28',style:'Low Top',colorway:'Black/White',emoji:'👟',hype:'new',
-    upper:'Canvas/Suede',sole:'Waffle rubber',sizes:['6','6.5','7','7.5','8','8.5','9','9.5','10','11','12'],
-    outOfStock:[],
-    specs:{SKU:'VN000D3HY28',Style:'Low Top Skate',Colorway:'Black/White',Upper:'Canvas and suede',Sole:'Waffle rubber outsole',Heritage:'First shoe with the iconic Sidestripe 1977',Padding:'Padded collar and tongue',Closure:'Lace-up'},
-    auth:['Sidestripe should be clean single line from heel to toe','Waffle sole pattern should be deep and consistent','Off The Wall logo inside should be clean font','Canvas and suede transition should be clean seam'],
-    history:[4500,4800,4499,5000,4800,4600,4400,4499],
-    sellers:[{n:'Amazon India',p:4499,o:true,stock:true},{n:'Flipkart',p:4799,o:true,stock:true},{n:'Myntra',p:4699,o:true,stock:true},{n:'Ajio',p:4599,o:true,stock:true},{n:'Vans India',p:4995,o:true,stock:true}]},
-];
+const SUPABASE_URL = 'https://rymkwqakfspaoslfvijn.supabase.co';
+const SUPABASE_KEY = 'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJzdXBhYmFzZSIsInJlZiI6InJ5bWt3cWFrZnNwYW9zbGZ2aWpuIiwicm9sZSI6ImFub24iLCJpYXQiOjE3ODQ1NzI0MTAsImV4cCI6MjEwMDE0ODQxMH0.BHi75s307z2BMe79fybTqATaukzX1a2dZKiTLsL_3Ig';
 
-const watches = [
-  {key:'casio-ae1200',brand:'Casio',name:'Casio AE1200WH-1A World Time',sku:'AE1200WH-1A',type:'Digital',emoji:'⌚',
-    specs:{SKU:'AE1200WH-1A',Type:'Digital',CaseSize:'40.6mm',Movement:'Quartz Digital',WaterResistance:'200M',Battery:'CR2016 · 10-year life',Display:'Dual-display LED',WorldTime:'31 Time Zones · 48 Cities',Features:'Stopwatch · Timer · 5 Alarms'},
-    sellers:[{n:'Amazon India',p:1595,o:true,stock:true},{n:'Flipkart',p:1799,o:true,stock:true},{n:'Casio India',p:1995,o:true,stock:true},{n:'Myntra',p:1699,o:true,stock:true}]},
-  {key:'casio-gshock-ga2100',brand:'Casio',name:'Casio G-Shock GA-2100-1A1',sku:'GA-2100-1A1',type:'Digital',emoji:'⌚',
-    specs:{SKU:'GA-2100-1A1',Type:'Analog-Digital',CaseSize:'45.4mm',Movement:'Quartz',WaterResistance:'200M',Battery:'CR1220 · 3-year life',Construction:'Carbon Core Guard structure',Features:'World Time · Stopwatch · Alarm · Shock Resistant',Display:'Analog + Digital dual display'},
-    sellers:[{n:'Amazon India',p:8495,o:true,stock:true},{n:'Casio India',p:9995,o:true,stock:true},{n:'Flipkart',p:8999,o:true,stock:true},{n:'Myntra',p:8799,o:true,stock:true}]},
-  {key:'casio-edifice',brand:'Casio',name:'Casio Edifice EFR-539D-1A',sku:'EFR-539D-1A',type:'Analog',emoji:'⌚',
-    specs:{SKU:'EFR-539D-1A',Type:'Analog Chronograph',CaseSize:'45mm',Movement:'Quartz',WaterResistance:'100M',Battery:'Battery powered',Dial:'Black dial with date',Chronograph:'1/20 sec stopwatch',Features:'Tachymeter bezel · Day/Date display'},
-    sellers:[{n:'Amazon India',p:6495,o:true,stock:true},{n:'Flipkart',p:6999,o:true,stock:true},{n:'Casio India',p:7995,o:true,stock:true},{n:'Myntra',p:6799,o:true,stock:true}]},
-  {key:'titan-neo',brand:'Titan',name:'Titan Neo Work Wear Analog Watch',sku:'NK1639SL02',type:'Analog',emoji:'⌚',
-    specs:{SKU:'NK1639SL02',Type:'Analog',CaseSize:'40mm',Movement:'Quartz Analog',WaterResistance:'30M',Strap:'Stainless steel bracelet',Dial:'Silver dial with date',Crystal:'Mineral crystal',Warranty:'1 year Titan service centre'},
-    sellers:[{n:'Amazon India',p:3995,o:true,stock:true},{n:'Flipkart',p:4299,o:true,stock:true},{n:'Titan Store',p:4495,o:true,stock:true},{n:'Myntra',p:4099,o:true,stock:true},{n:'Ajio',p:3999,o:true,stock:true}]},
-  {key:'titan-workwear',brand:'Titan',name:'Titan Work Wear Chronograph',sku:'NK9322SM01',type:'Analog',emoji:'⌚',
-    specs:{SKU:'NK9322SM01',Type:'Analog Chronograph',CaseSize:'42mm',Movement:'Quartz Chronograph',WaterResistance:'50M',Strap:'Leather strap',Dial:'Black dial with subdials',Crystal:'Sapphire coated',Warranty:'1 year Titan service centre'},
-    sellers:[{n:'Titan Store',p:8995,o:true,stock:true},{n:'Amazon India',p:8495,o:true,stock:true},{n:'Flipkart',p:8999,o:true,stock:true},{n:'Myntra',p:8699,o:true,stock:true}]},
-  {key:'fossil-gen6',brand:'Fossil',name:'Fossil Gen 6 Smartwatch 44mm',sku:'FTW4061',type:'Smart',emoji:'⌚',
-    specs:{SKU:'FTW4061',Type:'Smartwatch',CaseSize:'44mm',OS:'Wear OS by Google',Chip:'Snapdragon Wear 4100+',Battery:'24+ hour battery',Sensors:'HR · SpO2 · Accelerometer · Gyroscope',Connectivity:'Bluetooth 5.0 · NFC · Wi-Fi',WaterResistance:'3ATM'},
-    sellers:[{n:'Amazon India',p:17495,o:true,stock:true},{n:'Flipkart',p:18499,o:true,stock:true},{n:'Fossil Store',p:22495,o:true,stock:true},{n:'Myntra',p:18999,o:true,stock:true},{n:'Croma',p:19990,o:true,stock:true}]},
-  {key:'apple-watch-se2',brand:'Apple',name:'Apple Watch SE 2nd Gen 40mm GPS',sku:'MNJP3HN/A',type:'Smart',emoji:'⌚',
-    specs:{SKU:'MNJP3HN/A',Type:'Smartwatch',CaseSize:'40mm Aluminium',Chip:'Apple S8',Battery:'Up to 18 hours',Display:'Retina LTPO OLED',Sensors:'Accelerometer · Gyro · Heart Rate · Compass',Connectivity:'Bluetooth 5.3 · Wi-Fi · GPS',WaterResistance:'WR50'},
-    sellers:[{n:'Amazon India',p:29900,o:true,stock:true},{n:'Flipkart',p:31499,o:true,stock:true},{n:'Croma',p:32900,o:true,stock:true},{n:'Vijay Sales',p:31990,o:true,stock:true}]},
-  {key:'apple-watch-s9',brand:'Apple',name:'Apple Watch Series 9 41mm GPS',sku:'MR8T3HN/A',type:'Smart',emoji:'⌚',
-    specs:{SKU:'MR8T3HN/A',Type:'Smartwatch',CaseSize:'41mm Aluminium',Chip:'Apple S9 SiP',Battery:'Up to 18 hours · 36hr Low Power',Display:'Always-On Retina LTPO OLED 2000 nits',Sensors:'Blood Oxygen · ECG · Temperature · HR',Connectivity:'Bluetooth 5.3 · Wi-Fi 4 · GPS',WaterResistance:'WR50'},
-    sellers:[{n:'Amazon India',p:41900,o:true,stock:true},{n:'Flipkart',p:43999,o:true,stock:true},{n:'Croma',p:45900,o:true,stock:true},{n:'Vijay Sales',p:43490,o:true,stock:true},{n:'Reliance Digital',p:44990,o:true,stock:true}]},
-  {key:'samsung-gw6-classic',brand:'Samsung',name:'Samsung Galaxy Watch 6 Classic 47mm',sku:'SM-R960NZKAINS',type:'Smart',emoji:'⌚',
-    specs:{SKU:'SM-R960NZKAINS',Type:'Smartwatch',CaseSize:'47mm Stainless Steel',Chip:'Exynos W930',Battery:'425 mAh · Up to 40hr',Display:'1.47" Super AMOLED 480x480',Sensors:'BioActive Sensor · ECG · Temperature',OS:'Wear OS 4 + One UI Watch 5',WaterResistance:'5ATM + IP68',RotatingBezel:'Physical Rotating Bezel'},
-    sellers:[{n:'Samsung India',p:44999,o:true,stock:true},{n:'Amazon India',p:42999,o:true,stock:true},{n:'Flipkart',p:44499,o:true,stock:true},{n:'Croma',p:45990,o:true,stock:true}]},
-  {key:'seiko5-sports',brand:'Seiko',name:'Seiko 5 Sports SRPD55K1',sku:'SRPD55K1',type:'Automatic',emoji:'⌚',
-    specs:{SKU:'SRPD55K1',Type:'Automatic',CaseSize:'42.5mm',Movement:'Seiko 4R36 Automatic',WaterResistance:'100M',PowerReserve:'41 hours',Display:'Day/Date display',Crystal:'Hardlex crystal',Features:'Self-winding · Lumibrite hands · Rotating bezel'},
-    sellers:[{n:'Amazon India',p:18995,o:true,stock:true},{n:'Flipkart',p:19999,o:true,stock:true},{n:'Myntra',p:19499,o:true,stock:true},{n:'Croma',p:21990,o:true,stock:false}]},
-];
+// Local fallback data while DB loads
+let sneakers = [];
+let watches = [];
+let allProducts = [];
+let dbLoaded = false;
+
+async function fetchFromDB(category) {
+  const headers = {'apikey': SUPABASE_KEY, 'Authorization': 'Bearer ' + SUPABASE_KEY};
+  
+  // Fetch products
+  const res = await fetch(
+    `${SUPABASE_URL}/rest/v1/products?category=eq.${category}&select=*&limit=2000`,
+    {headers}
+  );
+  const products = await res.json();
+  
+  // Fetch sellers for these products
+  const keys = products.map(p => p.key);
+  const selRes = await fetch(
+    `${SUPABASE_URL}/rest/v1/sellers?product_key=in.(${keys.join(',')})&select=*`,
+    {headers}
+  );
+  const sellers = await selRes.json();
+
+  // Fetch sizes for sneakers
+  let sizesMap = {};
+  if(category === 'sneakers') {
+    const szRes = await fetch(
+      `${SUPABASE_URL}/rest/v1/sizes?product_key=in.(${keys.join(',')})&select=*`,
+      {headers}
+    );
+    const sizes = await szRes.json();
+    sizes.forEach(s => {
+      if(!sizesMap[s.product_key]) sizesMap[s.product_key] = [];
+      sizesMap[s.product_key].push({size: s.size, inStock: s.in_stock});
+    });
+  }
+
+  // Map to app format
+  return products.map(p => {
+    const prodSellers = sellers
+      .filter(s => s.product_key === p.key)
+      .map(s => ({n: s.seller_name, p: s.price, o: s.is_official, stock: s.in_stock}))
+      .sort((a,b) => a.p - b.p);
+    
+    const allSizes = sizesMap[p.key] || [];
+    const inStockSizes = allSizes.filter(s => s.inStock).map(s => s.size);
+    const outOfStock = allSizes.filter(s => !s.inStock).map(s => s.size);
+
+    return {
+      key: p.key,
+      brand: p.brand,
+      name: p.name,
+      sku: p.sku || '',
+      cat: p.category,
+      style: p.style || '',
+      colorway: p.colorway || '',
+      emoji: p.category === 'watches' ? '⌚' : '👟',
+      hype: p.hype || 'new',
+      type: p.watch_type || '',
+      case_size: p.case_size || '',
+      sizes: inStockSizes.concat(outOfStock),
+      outOfStock: outOfStock,
+      specs: {
+        SKU: p.sku || '',
+        Style: p.style || '',
+        Colorway: p.colorway || '',
+        Upper: p.upper || '',
+        Sole: p.sole || '',
+        Type: p.watch_type || '',
+        'Case Size': p.case_size || '',
+      },
+      sellers: prodSellers.length > 0 ? prodSellers : [{n:'Amazon India',p:9999,o:true,stock:true}],
+    };
+  });
+}
+
+async function loadAllProducts() {
+  try {
+    showLoading();
+    const [s, w] = await Promise.all([
+      fetchFromDB('sneakers'),
+      fetchFromDB('watches')
+    ]);
+    sneakers = s;
+    watches = w;
+    allProducts = [...s, ...w];
+    dbLoaded = true;
+    hideLoading();
+    renderGrid('sneakers');
+    renderGrid('watches');
+    document.getElementById('sneaker-count').textContent = sneakers.length + ' products';
+    document.getElementById('watch-count').textContent = watches.length + ' products';
+  } catch(e) {
+    console.error('DB load failed:', e);
+    hideLoading();
+  }
+}
+
+function showLoading() {
+  const el = document.getElementById('loadingBar');
+  if(el) el.style.display = 'block';
+}
+
+function hideLoading() {
+  const el = document.getElementById('loadingBar');
+  if(el) el.style.display = 'none';
+}
+
 
 const releases = [
   {name:'Nike Air Max Dn8',date:'Aug 2025',price:'₹12,495'},
@@ -1214,8 +1212,9 @@ document.addEventListener('click',e=>{
 });
 
 function toggleFilterVal(dropId,val,section){
-  const key=dropId.startsWith('brand')?'brands':dropId.startsWith('type')?'types':'styles';
-  const arr=activeFilters[section][key];
+  const keyMap = {'brand-s':'brands','brand-w':'brands','style-s':'styles','type-w':'types','color-s':'colors','casesize-w':'casesizes'};
+  const key = keyMap[dropId] || 'brands';
+  const arr = activeFilters[section][key] || (activeFilters[section][key]=[]);
   const idx=arr.indexOf(val);
   if(idx>-1)arr.splice(idx,1);else arr.push(val);
   const option=event.target.closest('.filter-option');
@@ -1242,7 +1241,11 @@ function setPriceFilter(section,min,max){
 }
 
 function clearFilters(section){
-  activeFilters[section]={brands:[],sizes:[],styles:[],types:[],price:null};
+  if(section==='sneakers'){
+    activeFilters[section]={brands:[],sizes:[],styles:[],colors:[],price:null};
+  } else {
+    activeFilters[section]={brands:[],types:[],casesizes:[],price:null};
+  }
   document.querySelectorAll('.filter-option.selected').forEach(o=>o.classList.remove('selected'));
   document.querySelectorAll('.size-opt.sel').forEach(o=>o.classList.remove('sel'));
   renderGrid(section);
@@ -1263,15 +1266,31 @@ function renderActiveFilters(section){
 
 function filterProducts(section){
   const data=section==='sneakers'?sneakers:watches;
+  if(!data || data.length===0) return [];
   const f=activeFilters[section];
   return data.filter(p=>{
     if(f.brands&&f.brands.length&&!f.brands.includes(p.brand))return false;
     if(f.sizes&&f.sizes.length&&p.sizes){
-      const avail=p.sizes.filter(s=>!p.outOfStock.includes(s));
+      const avail=p.sizes.filter(s=>!(p.outOfStock||[]).includes(s));
       if(!f.sizes.some(s=>avail.includes(s)))return false;
     }
     if(f.styles&&f.styles.length&&p.style&&!f.styles.includes(p.style))return false;
     if(f.types&&f.types.length&&p.type&&!f.types.includes(p.type))return false;
+    if(f.colors&&f.colors.length&&p.colorway){
+      if(!f.colors.some(c=>p.colorway.toLowerCase().includes(c.toLowerCase())))return false;
+    }
+    if(f.casesizes&&f.casesizes.length&&p.specs){
+      const mm=parseFloat((p.specs.CaseSize||'').replace(/[^0-9.]/g,''));
+      if(!isNaN(mm)){
+        const match=f.casesizes.some(cs=>{
+          if(cs==='Under 40mm')return mm<40;
+          if(cs==='40-44mm')return mm>=40&&mm<=44;
+          if(cs==='44mm+')return mm>44;
+          return false;
+        });
+        if(!match)return false;
+      }
+    }
     if(f.price){
       const best=Math.min(...p.sellers.map(s=>s.p));
       if(best<f.price.min||best>f.price.max)return false;
@@ -1674,14 +1693,13 @@ function init(){
       <div class="copped-time">${c.time}</div>
     </div>`).join('');
 
-  renderGrid('sneakers');
-  renderGrid('watches');
-
+  // DB products loaded via loadAllProducts()
   if(!localStorage.getItem('pc_ck2'))
     setTimeout(()=>document.getElementById('ck').classList.add('show'),2500);
 }
 
 init();
+loadAllProducts();
 </script>
 </body>
 </html>
