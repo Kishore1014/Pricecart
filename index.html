@@ -215,9 +215,9 @@ a{text-decoration:none;color:inherit}
 .filter-btn svg{transition:transform .2s}
 .filter-btn.open svg{transform:rotate(180deg)}
 .filter-dropdown{
-  position:absolute;top:calc(100% + 6px);left:0;
+  position:fixed;top:0;left:0;
   background:var(--white);border:1px solid var(--border);
-  border-radius:8px;z-index:9999;min-width:160px;
+  border-radius:8px;z-index:99999;min-width:160px;
   padding:6px;display:none;
   box-shadow:0 16px 40px rgba(0,0,0,0.15);
 }
@@ -1210,12 +1210,22 @@ function toggleFilter(id){
   const dd=document.getElementById(id);
   const btn=dd.previousElementSibling;
   if(openFilter&&openFilter!==id){
-    document.getElementById(openFilter).classList.remove('open');
-    document.getElementById(openFilter).previousElementSibling.classList.remove('open');
+    const old=document.getElementById(openFilter);
+    if(old){old.classList.remove('open');old.previousElementSibling.classList.remove('open');}
   }
+  const isOpen=dd.classList.contains('open');
   dd.classList.toggle('open');
   btn.classList.toggle('open');
   openFilter=dd.classList.contains('open')?id:null;
+  // Position dropdown using fixed coords to avoid z-index stacking issues
+  if(!isOpen){
+    const rect=btn.getBoundingClientRect();
+    dd.style.position='fixed';
+    dd.style.top=(rect.bottom+6)+'px';
+    dd.style.left=rect.left+'px';
+    dd.style.right='auto';
+    dd.style.zIndex='99999';
+  }
 }
 
 document.addEventListener('click',e=>{
